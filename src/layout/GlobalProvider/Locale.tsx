@@ -14,6 +14,11 @@ interface LocaleLayoutProps extends PropsWithChildren {
   defaultLang?: string;
 }
 
+// dayjs uses 'en' for US English (no en-us.js shipped), so map it.
+// All other supported locales resolve correctly via toLowerCase().
+const dayjsLocaleId = (lng: string) =>
+  lng?.toLowerCase() === 'en-us' ? 'en' : lng?.toLowerCase();
+
 const Locale = memo<LocaleLayoutProps>(({ children, defaultLang, antdLocale }) => {
   const [i18n] = useState(createI18nNext(defaultLang));
   const [lang, setLang] = useState(defaultLang);
@@ -37,7 +42,7 @@ const Locale = memo<LocaleLayoutProps>(({ children, defaultLang, antdLocale }) =
         if (!lang) return;
 
         // load default lang
-        const dayJSLocale = await import(`dayjs/locale/${lang!.toLowerCase()}.js`);
+        const dayJSLocale = await import(`dayjs/locale/${dayjsLocaleId(lang!)}.js`);
 
         dayjs.locale(dayJSLocale.default);
       });
@@ -53,7 +58,7 @@ const Locale = memo<LocaleLayoutProps>(({ children, defaultLang, antdLocale }) =
       const newLocale = await getAntdLocale(lng);
       setLocale(newLocale);
 
-      const dayJSLocale = await import(`dayjs/locale/${lng.toLowerCase()}.js`);
+      const dayJSLocale = await import(`dayjs/locale/${dayjsLocaleId(lng)}.js`);
 
       dayjs.locale(dayJSLocale.default);
     };
