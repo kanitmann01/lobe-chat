@@ -4,7 +4,23 @@ import { ModelProviderCard } from '@/types/llm';
 const DeepSeek: ModelProviderCard = {
   chatModels: [
     {
-      description: '擅长通用对话任务',
+      description: 'Skilled at general conversation tasks',
+      displayName: 'DeepSeek V4 Flash',
+      enabled: true,
+      functionCall: true,
+      id: 'deepseek-v4-flash',
+      tokens: 128_000,
+    },
+    {
+      description: 'Skilled at complex reasoning and professional tasks',
+      displayName: 'DeepSeek V4 Pro',
+      enabled: true,
+      functionCall: true,
+      id: 'deepseek-v4-pro',
+      tokens: 128_000,
+    },
+    {
+      description: 'Skilled at general conversation tasks',
       displayName: 'DeepSeek-V2',
       enabled: true,
       functionCall: true,
@@ -12,7 +28,7 @@ const DeepSeek: ModelProviderCard = {
       tokens: 128_000,
     },
     {
-      description: '擅长处理编程和数学任务',
+      description: 'Skilled at programming and math tasks',
       displayName: 'DeepSeek-Coder-V2',
       enabled: true,
       functionCall: true,
@@ -20,7 +36,7 @@ const DeepSeek: ModelProviderCard = {
       tokens: 128_000,
     },
   ],
-  checkModel: 'deepseek-chat',
+  checkModel: 'deepseek-v4-flash',
   id: 'deepseek',
   modelList: { showModelFetcher: true },
   name: 'DeepSeek',

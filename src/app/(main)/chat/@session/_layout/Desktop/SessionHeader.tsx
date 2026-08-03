@@ -1,7 +1,6 @@
 'use client';
 
 import { ActionIcon } from '@lobehub/ui';
-import { LobeChat } from '@lobehub/ui/brand';
 import { createStyles } from 'antd-style';
 import { MessageSquarePlus } from 'lucide-react';
 import { memo } from 'react';
@@ -17,8 +16,12 @@ import { useSessionStore } from '@/store/session';
 import SessionSearchBar from '../../features/SessionSearchBar';
 
 export const useStyles = createStyles(({ css, token }) => ({
-  logo: css`
-    fill: ${token.colorText};
+  brand: css`
+    font-size: 22px;
+    font-weight: 700;
+    color: ${token.colorText};
+    letter-spacing: -0.02em;
+    user-select: none;
   `,
   top: css`
     position: sticky;
@@ -38,7 +41,7 @@ const Header = memo(() => {
     <Flexbox className={styles.top} gap={16} padding={16}>
       <Flexbox distribution={'space-between'} horizontal>
         <Flexbox align={'center'} gap={4} horizontal>
-          <LobeChat className={styles.logo} size={36} type={'text'} />
+          <div className={styles.brand}>K13 Chat</div>
           {enableWebrtc && <SyncStatusTag />}
         </Flexbox>
         {showCreateSession && (

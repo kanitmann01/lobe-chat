@@ -61,3 +61,4 @@ robots.txt
 
 *.patch
 *.pdf
+.env*

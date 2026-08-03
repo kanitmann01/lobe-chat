@@ -112,6 +112,7 @@ const AppTheme = memo<AppThemeProps>(
         onAppearanceChange={(appearance) => {
           setCookie(LOBE_THEME_APPEARANCE, appearance);
         }}
+        theme={{ token: { colorPrimary: '#7E82DE' } }}
         themeMode={themeMode}
       >
         <GlobalStyle />

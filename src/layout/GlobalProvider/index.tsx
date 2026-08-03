@@ -63,11 +63,9 @@ const GlobalLayout = async ({ children }: PropsWithChildren) => {
 
   // get default locale config to use with ssr
   const defaultLang = cookieStore.get(LOBE_LOCALE_COOKIE);
-  const fallbackLang = parserFallbackLang();
 
-  // if it's a new user, there's no cookie
-  // So we need to use the fallback language parsed by accept-language
-  const userLocale = defaultLang?.value || fallbackLang;
+  // K13 Chat: pin UI to English regardless of browser language
+  const userLocale = defaultLang?.value || 'en-US';
 
   const antdLocale = await getAntdLocale(userLocale);
 
