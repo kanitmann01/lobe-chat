@@ -1,28 +1,33 @@
 'use client';
 
-import dynamic from 'next/dynamic';
+import { createStyles } from 'antd-style';
 import { memo } from 'react';
 import { Center } from 'react-layout-kit';
 
-const LogoThree = dynamic(() => import('@lobehub/ui/es/LogoThree'), { ssr: false });
-const LogoSpline = dynamic(() => import('@lobehub/ui/es/LogoThree/LogoSpline'), { ssr: false });
+const useStyles = createStyles(({ css, token }) => ({
+  brand: css`
+    font-size: 64px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: ${token.colorPrimary};
+    user-select: none;
+  `,
+  brandMobile: css`
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: ${token.colorPrimary};
+    user-select: none;
+  `,
+}));
 
+// K13 Chat: replaced the upstream 3D LogoThree/LogoSpline (which was removed
+// from @lobehub/ui 1.171+) with a clean static text wordmark.
 const Logo = memo<{ mobile?: boolean }>(({ mobile }) => {
-  return mobile ? (
-    <Center height={240} width={240}>
-      <LogoThree size={240} />
-    </Center>
-  ) : (
-    <Center
-      style={{
-        height: `min(482px, 40vw)`,
-        marginBottom: '-10%',
-        marginTop: '-20%',
-        position: 'relative',
-        width: `min(976px, 80vw)`,
-      }}
-    >
-      <LogoSpline height={'min(482px, 40vw)'} width={'min(976px, 80vw)'} />
+  const { styles } = useStyles();
+  return (
+    <Center height={mobile ? 240 : 360} width={mobile ? 240 : 600}>
+      <div className={mobile ? styles.brandMobile : styles.brand}>K13 Chat</div>
     </Center>
   );
 });

@@ -17,7 +17,7 @@ import {
   SiliconCloud,
   Stepfun,
   Together,
-  Tongyi,
+  Qwen,
   ZeroOne,
   Zhipu,
 } from '@lobehub/icons';
@@ -143,7 +143,7 @@ export const useProviderList = (): ProviderItem[] => {
       {
         ...QwenProviderCard,
         docUrl: urlJoin(BASE_DOC_URL, 'qwen'),
-        title: <Tongyi.Combine extra={'千问'} size={26} type={'color'} />,
+        title: <Qwen.Combine extra={'千问'} size={26} type={'color'} />,
       },
       {
         ...DeepSeekProviderCard,

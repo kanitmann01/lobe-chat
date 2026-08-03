@@ -1,7 +1,6 @@
 import dynamic from 'next/dynamic';
-import { cookies, headers } from 'next/headers';
+import { cookies } from 'next/headers';
 import { FC, PropsWithChildren } from 'react';
-import { resolveAcceptLanguage } from 'resolve-accept-language';
 
 import { getDebugConfig } from '@/config/debug';
 import { getServerFeatureFlagsValue } from '@/config/featureFlags';
@@ -11,7 +10,6 @@ import {
   LOBE_THEME_NEUTRAL_COLOR,
   LOBE_THEME_PRIMARY_COLOR,
 } from '@/const/theme';
-import { locales } from '@/locales/resources';
 import { getServerGlobalConfig } from '@/server/globalConfig';
 import { ServerConfigStoreProvider } from '@/store/serverConfig';
 import { getAntdLocale } from '@/utils/locale';
@@ -33,26 +31,6 @@ if (process.env.NODE_ENV === 'development') {
     DebugUI = dynamic(() => import('@/features/DebugUI'), { ssr: false }) as FC;
   }
 }
-
-const parserFallbackLang = () => {
-  /**
-   * The arguments are as follows:
-   *
-   * 1) The HTTP accept-language header.
-   * 2) The available locales (they must contain the default locale).
-   * 3) The default locale.
-   */
-  let fallbackLang: string = resolveAcceptLanguage(
-    headers().get('accept-language') || '',
-    //  Invalid locale identifier 'ar'. A valid locale should follow the BCP 47 'language-country' format.
-    locales.map((locale) => (locale === 'ar' ? 'ar-EG' : locale)),
-    'en-US',
-  );
-  // if match the ar-EG then fallback to ar
-  if (fallbackLang === 'ar-EG') fallbackLang = 'ar';
-
-  return fallbackLang;
-};
 
 const GlobalLayout = async ({ children }: PropsWithChildren) => {
   // get default theme config to use with ssr
