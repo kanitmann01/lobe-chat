@@ -121,7 +121,8 @@ export const DEFAULT_LLM_CONFIG: UserModelProviderConfig = {
   },
 };
 
-export const DEFAULT_MODEL = 'gpt-4o-mini';
+// K13 Chat: default to DeepSeek (the configured provider for this deployment)
+export const DEFAULT_MODEL = 'deepseek-v4-flash';
 export const DEFAULT_EMBEDDING_MODEL = 'text-embedding-3-small';
 
-export const DEFAULT_PROVIDER = ModelProvider.OpenAI;
+export const DEFAULT_PROVIDER = ModelProvider.DeepSeek;
